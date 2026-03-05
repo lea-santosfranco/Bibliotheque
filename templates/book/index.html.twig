@@ -23,7 +23,7 @@
 						<td>{{ book.isbn }}</td>
 						<td>{{ book.stock }}</td>
 						<td>
-							<a class="btn btn-outline-primary" href="{{ path('app_emprunt', {'id': book.id}) }}">Emprunter</a>
+							<a class="btn btn-outline-primary" href="{{ path('app_emprunt_new', {'id': book.id}) }}">Emprunter</a>
 							<a class="btn btn-outline-success" href="{{path('app_book_edit', {'id': book.id})}}">Modifier</a>
 							<a class="btn btn-danger" href="{{path('app_book_delete', {'id': book.id})}}">Supprimer</a>
 						</td>

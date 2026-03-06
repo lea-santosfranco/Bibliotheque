@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Book;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookType extends AbstractType
@@ -15,6 +17,25 @@ class BookType extends AbstractType
             ->add('titre')
             ->add('auteur')
             ->add('isbn')
+            ->add('image', FileType::class, [
+                'label' => 'Image du produit',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File(
+                        maxSize: '1024k',
+                        mimeTypes: [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                            'image/webp',
+                            'image/x-webp'
+                        ],
+                        maxSizeMessage: 'Le fichier est trop lourd (1024k max).',
+                        mimeTypesMessage: 'Veuillez choisir un format d\'image valide.',
+                    )
+                ]
+            ])
             ->add('stock')
         ;
     }

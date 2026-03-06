@@ -1,9 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Bienvenue à la bibliothèque
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    
-</div>
+	<div class="container">
+		<h1 class="mb-5 mt-5">Livres</h1>
+		<div class="row">
+			{% for book in books %}
+				<div class="col-md-3 mt-4">
+					<div class="card" style="width: 18rem;">
+						<img src="{{ asset('images/'~book.image)}}" class="imgbook card-img-top" alt="image des livres">
+						<div class="card-body">
+							<a class="titleBookLink" href="{{ path('app_book_show',{'id':book.id}) }} ">
+								<h5 class="card-title titleBook">{{ book.titre }}</h5>
+							</a>
+							<p class="card-text">{{ book.auteur }}</p>
+							{% if book.stock > 0 %}
+								<a class="btn btn-outline-primary" href="{{ path('app_emprunt_new', {'id': book.id}) }}">Emprunter</a>
+							{% else %}
+								<button class="btn btn-secondary" disabled>Victime de son succès</button>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

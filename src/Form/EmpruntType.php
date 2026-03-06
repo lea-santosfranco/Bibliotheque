@@ -41,9 +41,10 @@ class EmpruntType extends AbstractType
             ->add('lastName', TextType::class, ['mapped' => false])
             ->add('firstName', TextType::class, ['mapped' => false])
             ->add('email', EmailType::class, ['mapped' => false]);
+            
     }
     
-    $builder->add('phone', TelType::class, ['mapped' => false, 'required' => false, 'label'=>'Téléphone']);
+    $builder->add('phoneNumber', TelType::class, ['required' => false, 'label'=>'Téléphone']);
 }
 
 public function configureOptions(OptionsResolver $resolver): void

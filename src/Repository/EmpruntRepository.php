@@ -25,7 +25,15 @@ class EmpruntRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
+    public function findHistoryByUser(int $userId): array
+    {
+        return $this->createQueryBuilder('emprunt')
+            ->andWhere('emprunt.user = :id')
+            ->setParameter('id', $userId)
+            ->orderBy('emprunt.dateEmprunt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
     //    /**
     //     * @return Emprunt[] Returns an array of Emprunt objects
     //     */

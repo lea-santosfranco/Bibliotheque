@@ -36,7 +36,7 @@ class Book
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 1500, nullable: true)]
     private ?string $resume = null;
 
     public function __construct()

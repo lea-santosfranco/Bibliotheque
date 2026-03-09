@@ -17,6 +17,7 @@ class BookType extends AbstractType
             ->add('titre')
             ->add('auteur')
             ->add('isbn')
+            ->add('resume')
             ->add('image', FileType::class, [
                 'label' => 'Image du produit',
                 'mapped' => false,

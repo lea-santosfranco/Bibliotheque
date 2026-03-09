@@ -3,7 +3,7 @@
     height: 25rem;
 }
 .imgBookIndex{
-    width: 60%;
+    width: 100px;
     height: 10rem;
 }
 .imgShow{
@@ -16,4 +16,8 @@
     align-content: center;
     align-items: center;
     justify-content: center;
+}
+.titleBookLink{
+    text-decoration: none;
+    
 }

@@ -24,7 +24,7 @@
 						<td><img class="imgBookIndex" src="{{ asset('images/'~book.image)}}" class="imgbook card-img-top" alt="image des livres"></td>
 						<td>{{ book.titre }}</td>
 						<td>{{ book.auteur }}</td>
-						<td>{{ book.resume }}</td>
+						<td>{{ book.resume |slice(0,60)}}...</td>
 						<td>{{ book.isbn }}</td>
 						<td>{{ book.stock }}</td>
 						<td>

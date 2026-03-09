@@ -40,13 +40,11 @@
 										<span class="badge {{ emprunt.statut == 'rendu' ? 'bg-success' : 'bg-warning text-dark' }}">
 											{{ emprunt.statut|upper }}
 										</span>
-                                        {% endif %}
-
-										{% if emprunt.dateRetour %}
-											<small class="text-muted d-block">le
-												{{ emprunt.dateRetour|date('d/m/Y') }}</small>
-										{% endif %}
-									</td>
+										<small class="text-muted d-block">le
+											{{ emprunt.dateRetour|date('d/m/Y') }}</small>
+									{% else %}
+										<span class="badge bg-primary">EN COURS</span>
+									{% endif %}
 								</td>
 								<td class="text-end align-middle">
 									<div class="btn-group">

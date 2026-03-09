@@ -40,6 +40,7 @@
 										<span class="badge {{ emprunt.statut == 'rendu' ? 'bg-success' : 'bg-warning text-dark' }}">
 											{{ emprunt.statut|upper }}
 										</span>
+                                        {% endif %}
 
 										{% if emprunt.dateRetour %}
 											<small class="text-muted d-block">le
@@ -62,7 +63,7 @@
 									</div>
 								</td>
 							</tr>
-						{% else %}
+						    {% else %}
 							<tr>
 								<td colspan="5" class="text-center py-4 text-muted">
 									<em>Aucun emprunt enregistré pour le moment.</em>

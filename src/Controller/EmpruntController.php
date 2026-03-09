@@ -20,7 +20,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class EmpruntController extends AbstractController
 {
     #[Route('/emprunt', name: 'app_emprunt')]
-    
+
     public function index(EmpruntRepository $empruntRepository): Response
     {
         $emprunts = $empruntRepository->findEnCours();
@@ -115,7 +115,7 @@ final class EmpruntController extends AbstractController
     public function userFullHistory(User $user, EmpruntRepository $empruntRepository): Response
     {
         $user = $this->getUser();
-        if (!$user){
+        if (!$user) {
             return $this->redirectToRoute('app_login');
         }
         $emprunts = $empruntRepository->findBy(['user' => $user], ['dateEmprunt' => 'DESC']);
@@ -126,16 +126,25 @@ final class EmpruntController extends AbstractController
         ]);
     }
     #[Route('/emprunt/rendre/{id}', name: 'app_emprunt_rendre', methods: ['POST', 'GET'])]
-public function returnBook(Emprunt $emprunt, EntityManagerInterface $entityManager): Response
-{
-    if (!$emprunt->getDateRetour()) {
-        $emprunt->setDateRetour(new \DateTimeImmutable());
-        $emprunt->setStatut('terminé');
-        $entityManager->flush();
+    public function returnBook(Emprunt $emprunt, EntityManagerInterface $entityManager): Response
+    {
 
-        $this->addFlash('success', 'Le livre "' . $emprunt->getBook()->getTitre() . '" a bien été rendu.');
+        if (!$emprunt->getDateRetour()) {
+
+            $emprunt->setDateRetour(new \DateTimeImmutable());
+            $emprunt->setStatut('terminé');
+
+            $book = $emprunt->getBook();
+            if ($book) {
+                $book->setStock($book->getStock() + 1);
+            }
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Le livre "' . $book->getTitre() . '" a bien été rendu et le stock a été mis à jour.');
+        } else {
+            $this->addFlash('warning', 'Ce livre a déjà été marqué comme rendu.');
+        }
+
+        return $this->redirectToRoute('app_emprunt_user_history', ['id' => $emprunt->getUser()->getId()]);
     }
-
-    return $this->redirectToRoute('app_emprunt_user_history', ['id' => $emprunt->getUser()->getId()]);
-}
 }

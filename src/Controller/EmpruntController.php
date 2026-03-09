@@ -113,7 +113,10 @@ final class EmpruntController extends AbstractController
     #[Route('/emprunts/user/{id}', name: 'app_emprunt_user_history')]
     public function userFullHistory(User $user, EmpruntRepository $empruntRepository): Response
     {
-        
+        $user = $this->getUser();
+        if (!$user){
+            return $this->redirectToRoute('app_login');
+        }
         $emprunts = $empruntRepository->findBy(['user' => $user], ['dateEmprunt' => 'DESC']);
 
         return $this->render('emprunt/user_history.html.twig', [

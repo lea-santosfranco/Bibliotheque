@@ -10,7 +10,7 @@
 			{% for book in books %}
 				<div class="col-md-3 mt-4">
 					<div class="card" style="width: 18rem;">
-						<img src="{{ asset('images/'~book.image)}}" class="imgbook card-img-top" alt="image des livres">
+						<img class="imgBook" src="{{ asset('images/'~book.image)}}" class="imgbook card-img-top" alt="image des livres">
 						<div class="card-body">
 							<a class="titleBookLink" href="{{ path('app_book_show',{'id':book.id}) }} ">
 								<h5 class="card-title titleBook">{{ book.titre }}</h5>

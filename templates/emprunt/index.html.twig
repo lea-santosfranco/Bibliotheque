@@ -25,9 +25,9 @@
                     <td>{{ emprunt.dateEmprunt|date('d/m/Y') }}</td>
                     <td>
                         {% if emprunt.statut == 'en_cours' %}
-                            <span class="badge badge-warning">EN_COURS</span>
+                            <span>EN_COURS</span>
                         {% else %}
-                            <span class="badge badge-success">TERMINE</span>
+                            <span>TERMINE</span>
                         {% endif %}
                     </td>
                     <td>

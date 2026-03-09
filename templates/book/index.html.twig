@@ -9,6 +9,7 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<th></th>
 					<th>Titre</th>
 					<th>Auteur</th>
 					<th>Résumé</th>
@@ -20,6 +21,7 @@
 			<tbody>
 				{% for book in books %}
 					<tr>
+						<td><img class="imgBookIndex" src="{{ asset('images/'~book.image)}}" class="imgbook card-img-top" alt="image des livres"></td>
 						<td>{{ book.titre }}</td>
 						<td>{{ book.auteur }}</td>
 						<td>{{ book.resume }}</td>

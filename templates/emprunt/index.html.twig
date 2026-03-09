@@ -1,76 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes Emprunts
-{% endblock %}
+{% block title %}Gestion des Emprunts{% endblock %}
 
 {% block body %}
-	<div class="container mt-4">
-		<div class="d-flex justify-content-between align-items-center mb-4">
-			<h1>Liste des Emprunts ({{ emprunts|length }})</h1>
-			<a href="{{ path('app_book_index') }}" class="btn btn-outline-secondary btn-sm">Retour aux livres</a>
-		</div>
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        {# En-tête bleu harmonisé avec le reste du site #}
+        <div class="card-header bg-primary text-white p-3 d-flex justify-content-between align-items-center">
+            <h1 class="h4 mb-0">Liste des Emprunts</h1>
+            <span class="badge bg-white text-primary fw-bold fs-6">{{ emprunts|length }} au total</span>
+        </div>
 
-		<div class="card shadow-sm">
-			<div class="card-body">
-				<table class="table table-hover mb-0">
-					<thead class="table-light">
-						<tr>
-							<th>Livre</th>
-							<th>Emprunteur</th>
-							<th>Date d'emprunt</th>
-							<th>Statut</th>
-							<th class="text-end">Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for emprunt in emprunts %}
-							<tr>
-								<td class="align-middle">
-									<strong>{{ emprunt.book.titre }}</strong>
-								</td>
-								<td class="align-middle">
-									{{ emprunt.user.firstName }}
-									{{ emprunt.user.lastName }}
-								</td>
-								<td class="align-middle">
-									{{ emprunt.dateEmprunt|date('d/m/Y') }}
-								</td>
-								<td class="align-middle">
-									{% if emprunt.dateRetour %}
-										<span class="badge {{ emprunt.statut == 'rendu' ? 'bg-success' : 'bg-warning text-dark' }}">
-											{{ emprunt.statut|upper }}
-										</span>
-										<small class="text-muted d-block">le
-											{{ emprunt.dateRetour|date('d/m/Y') }}</small>
-									{% else %}
-										<span class="badge bg-primary">EN COURS</span>
-									{% endif %}
-								</td>
-								<td class="text-end align-middle">
-									<div class="btn-group">
-										<a href="{{ path('app_emprunt_show', {'id': emprunt.id}) }}" class="btn btn-sm btn-info text-white">
-											<i class="fas fa-eye"></i>
-											Détail
-										</a>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-uppercase small">
+                    <tr>
+                        <th class="ps-4 py-3">Livre</th>
+                        <th>Emprunteur</th>
+                        <th>Date d'emprunt</th>
+                        <th>Statut</th>
+                        <th class="text-end pe-4">Gestion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emprunt in emprunts %}
+                        <tr>
+                            <td class="ps-4">
+                                <div class="fw-bold text-dark">{{ emprunt.book.titre }}</div>
+                                <div class="text-muted small">ID Livre: #{{ emprunt.book.id }}</div>
+                            </td>
+                            <td>
+                                <span class="text-primary fw-semibold">{{ emprunt.user.firstName }} {{ emprunt.user.lastName }}</span>
+                            </td>
+                            <td>
+                                <span class="text-secondary">📅 {{ emprunt.dateEmprunt|date('d/m/Y') }}</span>
+                            </td>
+                            <td>
+                                {% if emprunt.dateRetour %}
+                                    <span class="badge bg-success-subtle text-success border border-success px-3">
+                                        RENDU LE {{ emprunt.dateRetour|date('d/m/Y') }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-primary px-3">EN COURS</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="btn-group btn-group-sm">
+                                    <a href="{{ path('app_emprunt_show', {'id': emprunt.id}) }}" class="btn btn-outline-secondary">
+                                        Détails
+                                    </a>
 
-										{% if not emprunt.dateRetour %}
-											<a href="{{ path('app_emprunt_rendre', {'id': emprunt.id}) }}" class="btn btn-sm btn-success" onclick="return confirm('Confirmer le retour de ce livre ?')">
-												Rendre
-											</a>
-										{% endif %}
-									</div>
-								</td>
-							</tr>
-						{% else %}
-							<tr>
-								<td colspan="5" class="text-center py-4 text-muted">
-									<em>Aucun emprunt enregistré pour le moment.</em>
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+                                    {% if not emprunt.dateRetour %}
+                                        <a href="{{ path('app_emprunt_rendre', {'id': emprunt.id}) }}" 
+                                           class="btn btn-success" 
+                                           onclick="return confirm('Confirmer le retour de ce livre ?')">
+                                            Valider le retour
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted italic">
+                                Aucun emprunt enregistré pour le moment.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('app_book_index') }}" class="btn btn-outline-primary">
+            ← Retour aux livres
+        </a>
+    </div>
+</div>
 {% endblock %}

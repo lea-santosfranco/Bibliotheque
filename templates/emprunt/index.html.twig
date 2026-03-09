@@ -3,9 +3,46 @@
 {% block title %}Mes Emprunts{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Liste de mes emprunts</h1>
-    <p>Ici s'affichera la liste de tous vos emprunts.</p>
-    
+<div class="container mt-4">
+    <h1>Emprunts en cours ({{ emprunts|length }})</h1>
+
+    <table class="table table-hover mt-4">
+        <thead class="thead-light">
+            <tr>
+                <th>Livre</th>
+                <th>Emprunteur</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprunt in emprunts %}
+                <tr>
+                    <td>{{ emprunt.book.titre }}</td>
+                    <td>{{ emprunt.user.firstName }}</td>
+                    <td>{{ emprunt.user.lastName}}</td>
+                    <td>{{ emprunt.dateEmprunt|date('d/m/Y') }}</td>
+                    <td>
+                        {% if emprunt.statut == 'en_cours' %}
+                            <span class="badge badge-warning">EN_COURS</span>
+                        {% else %}
+                            <span class="badge badge-success">TERMINE</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_emprunt_show', {'id': emprunt.id}) }}" class="btn btn-sm btn-info">Détail</a>
+                        {% if emprunt.statut == 'en_cours' %}
+                            <a href="#" class="btn btn-sm btn-success">Rendre</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center italic">Aucun emprunt enregistré pour le moment.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

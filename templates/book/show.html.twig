@@ -11,24 +11,22 @@
 
 		<div class="row">
 			<div class="col-md-4">
-				<div style="width: 200px; height: 300px; background-color: #eee; display: flex; align-items: center; justify-content: center; border: 1px solid #ccc;">
-					<span>Couverture</span>
+					<img src="{{ asset('images/'~book.image)}}" class="imgbook card-img-top" alt="image des livres">
 				</div>
 			</div>
 
 			<div class="col-md-8">
 				<h2>Titre :
-					{{ livre.titre | default('Titre inconnu') }}</h2>
+					{{ book.titre }}</h2>
 				<p>
-					<strong>Auteur :</strong>
-					{{ livre.auteur | default('Auteur anonyme') }}</p>
+					Auteur :
+					{{ book.auteur }}</p>
 				<p>
-					<strong>Résumé :</strong>
+					Résumé :
+					{{ book.resume }}
 				</p>
-				<p>{{ livre.resume | default('Aucun résumé disponible pour ce livre.') }}</p>
-
 				<p>
-					<strong>Statut :</strong>
+					Statut :
 					{% if book.stock > 0 %}
 						<span class="badge bg-success">Disponible</span>
 					{% else %}

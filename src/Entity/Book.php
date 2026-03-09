@@ -36,6 +36,9 @@ class Book
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $resume = null;
+
     public function __construct()
     {
         $this->emprunts = new ArrayCollection();
@@ -132,6 +135,18 @@ class Book
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getResume(): ?string
+    {
+        return $this->resume;
+    }
+
+    public function setResume(?string $resume): static
+    {
+        $this->resume = $resume;
 
         return $this;
     }

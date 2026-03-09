@@ -35,7 +35,6 @@ final class BookController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
-            dd($image);
 
             if ($image) {
                 $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
@@ -118,5 +117,12 @@ final class BookController extends AbstractController
         }
 
         return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/stats/auteurs', name: 'app_book_stats')]
+    public function statsAuteurs(BookRepository $bookRepository): Response
+    {
+        return $this->render('book/stats.html.twig', [
+            'stats' => $bookRepository->countByAuteur(),
+        ]);
     }
 }

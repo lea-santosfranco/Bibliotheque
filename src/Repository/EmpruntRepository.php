@@ -16,6 +16,16 @@ class EmpruntRepository extends ServiceEntityRepository
         parent::__construct($registry, Emprunt::class);
     }
 
+    public function findEnCours(): array
+    {
+        return $this->createQueryBuilder('emprunt')
+            ->andWhere('emprunt.statut = :val')
+            ->setParameter('val', 'en_cours')
+            ->orderBy('emprunt.dateEmprunt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Emprunt[] Returns an array of Emprunt objects
     //     */

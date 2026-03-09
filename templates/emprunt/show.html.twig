@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de l'emprunt{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Détail de l'emprunt #{{ emprunt.id }}</h1>
+        <p>Livre : {{ emprunt.book.titre }}</p>
+        <p>Emprunteur : {{ emprunt.user.lastName }} {{ emprunt.user.firstName }}</p>
+        <a href="{{ path('app_emprunt') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+{% endblock %}

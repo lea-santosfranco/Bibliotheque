@@ -15,14 +15,22 @@ class BookRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Book::class);
     }
-    public function countByAuteur(): array
-{
-    return $this->createQueryBuilder('book')
-        ->select('book.auteur, COUNT(book.id) as total')
-        ->groupBy('book.auteur')
-        ->getQuery()
-        ->getResult();
+
+    /**
+     * Cette méthode récupère la liste des auteurs et le nombre de livres associés.
+     * Elle retourne un tableau de tableaux associatifs.
+     */
+    public function countBooksByAuthor(): array
+    {
+        return $this->createQueryBuilder('b')
+            ->select('b.auteur, COUNT(b.id) as total')
+            ->groupBy('b.auteur')
+            ->orderBy('total', 'DESC') // Trie par les auteurs les plus productifs
+            ->getQuery()
+            ->getResult();
+    }
 }
+
 
 
     //    /**
@@ -49,4 +57,3 @@ class BookRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}

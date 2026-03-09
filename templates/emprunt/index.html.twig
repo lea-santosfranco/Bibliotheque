@@ -33,7 +33,7 @@
                     <td>
                         <a href="{{ path('app_emprunt_show', {'id': emprunt.id}) }}" class="btn btn-sm btn-info">Détail</a>
                         {% if emprunt.statut == 'en_cours' %}
-                            <a href="#" class="btn btn-sm btn-success">Rendre</a>
+                            <a href="{{ path('app_emprunt_show', {'id': emprunt.id}) }}" class="btn btn-sm btn-success">Rendre</a>
                         {% endif %}
                     </td>
                 </tr>

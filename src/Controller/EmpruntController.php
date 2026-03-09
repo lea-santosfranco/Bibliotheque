@@ -7,6 +7,7 @@ use App\Entity\Emprunt;
 use App\Entity\User;
 use App\Form\EmpruntType;
 use App\Repository\EmpruntRepository;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,11 +16,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[IsGranted('ROLE_ADMIN')]
 
 final class EmpruntController extends AbstractController
 {
     #[Route('/emprunt', name: 'app_emprunt')]
+    
     public function index(EmpruntRepository $empruntRepository): Response
     {
         $emprunts = $empruntRepository->findEnCours();
@@ -124,5 +125,17 @@ final class EmpruntController extends AbstractController
             'emprunts' => $emprunts,
         ]);
     }
-    
+    #[Route('/emprunt/rendre/{id}', name: 'app_emprunt_rendre', methods: ['POST', 'GET'])]
+public function returnBook(Emprunt $emprunt, EntityManagerInterface $entityManager): Response
+{
+    if (!$emprunt->getDateRetour()) {
+        $emprunt->setDateRetour(new \DateTimeImmutable());
+        $emprunt->setStatut('terminé');
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Le livre "' . $emprunt->getBook()->getTitre() . '" a bien été rendu.');
+    }
+
+    return $this->redirectToRoute('app_emprunt_user_history', ['id' => $emprunt->getUser()->getId()]);
+}
 }

@@ -36,6 +36,7 @@
                                     <span class="badge bg-success">Rendu</span>
                                 {% else %}
                                     <span class="badge bg-warning text-dark">En cours</span>
+                                    <a href="{{ path('app_emprunt_rendre', {'id': emprunt.id}) }}" class="btn btn-sm btn-primary mt-1">Rendre</a>
                                 {% endif %}
                             </td>
                         </tr>

@@ -1,5 +1,103 @@
+:root {
+  --bs-blue-100: #cfe2ff;
+  --bs-indigo-100: #e0cffc;
+  --bs-purple-100: #e2d9f3;
+  --bs-pink-100: #f7d6e6; 
+  --bs-red-100: #f8d7da;
+  --bs-orange-100: #ffe5d0;
+  --bs-yellow-100: #fff3cd;
+  --bs-green-100: #d1e7dd;
+  --bs-teal-100: #d2f4ea;
+  --bs-cyan-100: #cff4fc;
+
+  --bs-pink-900: #6a1a41;
+  --bs-purple-900: #382159;
+  --bs-indigo-900: #330876;
+}
+
+.bg-blue-100   { background-color: var(--bs-blue-100) !important; }
+.bg-indigo-100 { background-color: var(--bs-indigo-100) !important; }
+.bg-purple-100 { background-color: var(--bs-purple-100) !important; }
+.bg-pink-100   { background-color: var(--bs-pink-100) !important; }
+.bg-red-100    { background-color: var(--bs-red-100) !important; }
+.bg-orange-100 { background-color: var(--bs-orange-100) !important; }
+.bg-yellow-100 { background-color: var(--bs-yellow-100) !important; }
+.bg-green-100  { background-color: var(--bs-green-100) !important; }
+.bg-teal-100   { background-color: var(--bs-teal-100) !important; }
+.bg-cyan-100   { background-color: var(--bs-cyan-100) !important; }
+
+
+.text-pink-900   { color: var(--bs-pink-900) !important; }
+.text-purple-900 { color: var(--bs-purple-900) !important; }
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+:root {
+  /* Fonds clairs (Nuances 100) */
+  --bs-blue-100: #cfe2ff;
+  --bs-indigo-100: #e0cffc;
+  --bs-purple-100: #e2d9f3;
+  --bs-pink-100: #f7d6e6;
+  --bs-red-100: #f8d7da;
+  --bs-orange-100: #ffe5d0;
+  --bs-yellow-100: #fff3cd;
+  --bs-green-100: #d1e7dd;
+  --bs-teal-100: #d2f4ea;
+  --bs-cyan-100: #cff4fc;
+
+  /* Fonds un peu plus colorés (Nuances 200) */
+  --bs-blue-200: #9ec5fe;
+  --bs-indigo-200: #c29ffa;
+  --bs-purple-200: #c5b3e5;
+  --bs-pink-200: #f1aeb5;
+  --bs-red-200: #f5c2c7;
+  --bs-orange-200: #feb272;
+  --bs-yellow-200: #ffe69c;
+  --bs-green-200: #a3cfbb;
+  --bs-teal-200: #a6e9d5;
+  --bs-cyan-200: #9eeaf9;
+}
+
+/* --- Classes Background 200 --- */
+.bg-blue-200   { background-color: var(--bs-blue-200) !important; }
+.bg-indigo-200 { background-color: var(--bs-indigo-200) !important; }
+.bg-purple-200 { background-color: var(--bs-purple-200) !important; }
+.bg-pink-200   { background-color: var(--bs-pink-200) !important; }
+.bg-red-200    { background-color: var(--bs-red-200) !important; }
+.bg-orange-200 { background-color: var(--bs-orange-200) !important; }
+.bg-yellow-200 { background-color: var(--bs-yellow-200) !important; }
+.bg-green-200  { background-color: var(--bs-green-200) !important; }
+.bg-teal-200   { background-color: var(--bs-teal-200) !important; }
+.bg-cyan-200   { background-color: var(--bs-cyan-200) !important; }
 body {
-    background-color: skyblue;
+    background-color: rgb(236, 250, 253);
 }
 .loginForm {
     width: 500px;

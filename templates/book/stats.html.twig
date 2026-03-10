@@ -5,8 +5,8 @@
 {% block body %}
 <div class="container mt-5">
     <div class="card shadow-sm border-0">
-        <div class="card-header bg-primary text-white p-3">
-            <h2 class="h4 mb-0">📊 Statistiques par Auteur</h2>
+        <div class="card-header bg-blue-200 text-white p-3">
+            <h2 class="h4 mb-0">Statistiques par Auteur</h2>
         </div>
 
         <div class="card-body p-0">
@@ -24,8 +24,7 @@
                                 <strong class="text-dark">{{ stat.auteur }}</strong>
                             </td>
                             <td class="text-center">
-                                {# Un badge simple pour faire ressortir le chiffre #}
-                                <span class="badge bg-info text-dark rounded-pill px-3">
+                                <span class="badge bg-blue-200 text-dark rounded-pill px-3">
                                     {{ stat.total }}
                                 </span>
                             </td>
@@ -42,7 +41,6 @@
         </div>
     </div>
 
-    {# Lien de retour discret #}
     <div class="mt-3">
         <a href="{{ path('app_book_index') }}" class="btn btn-link text-secondary text-decoration-none small">
             ← Retour au catalogue

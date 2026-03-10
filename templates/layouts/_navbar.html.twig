@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="{{ path('app_home') }}">Biblio</a>
+		<a class="navbar-brand" href="{{ path('app_home') }}">Bibliothèque</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -63,9 +63,9 @@
 					</ul>
 				</li>
 			</ul>
-			<form class="d-flex">
-				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
+			<form class="d-flex" action="{{ path('app_book_index') }}" method="get">
+				<input class="form-control me-2 border-pink-200" type="search" name="recherche" placeholder="Titre, auteur..." value="{{ app.request.query.get('recherche') }}">
+				<button class="btn btn-outline-pink-900" type="submit">Chercher</button>
 			</form>
 		</div>
 	</div>

@@ -18,10 +18,18 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 final class BookController extends AbstractController
 {
     #[Route(name: 'app_book_index', methods: ['GET'])]
-    public function index(BookRepository $bookRepository): Response
+    public function index(BookRepository $bookRepository, Request $request): Response 
     {
+        $motCle = $request->query->get('recherche');
+
+        if ($motCle) {
+            $books = $bookRepository->findBySearch($motCle);
+        } else {
+            $books = $bookRepository->findAll();
+        }
+
         return $this->render('book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
+            'books' => $books,
         ]);
     }
 

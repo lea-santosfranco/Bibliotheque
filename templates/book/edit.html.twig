@@ -1,15 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier Livre{% endblock %}
+{% block title %}Modifier Livre
+{% endblock %}
 
 {% block body %}
-<div class="container">
-		<h1>Modifier livre</h1>
+	<div class="container mt-5" style="max-width: 700px;">
 
-		{{ include('book/_form.html.twig', {'button_label': 'Update'}) }}
+		<div class="mb-4 text-center">
+			{% if book.image %}
+				<img src="{{ asset('images/' ~ book.image) }}" alt="Couverture" class="img-fluid rounded shadow-sm mb-3" style="max-height: 200px;">
+			{% endif %}
 
-		<a href="{{ path('app_book_index') }}">Retour à la liste</a>
+			<h1 class="h3 mb-0">Modifier :
+				{{ book.titre }}</h1>
 
-		{{ include('book/_delete_form.html.twig') }}
+
+			<a href="{{ path('app_book_index') }}" class="text-muted small text-decoration-none">
+				← Retour à la liste
+			</a>
+		</div>
+
+		<div class="card shadow-sm border-0">
+			<div class="card-body p-4">
+				{{ include('book/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+			</div>
+		</div>
+
+		<div class="mt-4 text-center">
+			{{ include('book/_delete_form.html.twig') }}
+		</div>
 	</div>
 {% endblock %}

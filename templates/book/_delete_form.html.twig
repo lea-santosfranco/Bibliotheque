@@ -1,14 +1,23 @@
-<div class="container">
-    <form
-        method="post"
-        action="{{ path('app_book_delete', { id: book.id }) }}"
-        onsubmit="return confirm('Etes-vous sûr de vouloir supprimer ce livre ?');"
-    >
-        <input
-            type="hidden"
-            name="_token"
-            value="{{ csrf_token('delete' ~ book.id) }}"
-        />
-        <button class="btn btn-alert">Supprimer</button>
-    </form>
+<div class="d-inline-block">
+    {% if book.isEmprunte %}
+        <button class="btn btn-outline-secondary disabled" title="Impossible de supprimer un livre en cours d'emprunt" disabled>
+            <i class="bi bi-lock-fill"></i> Supprimer (Emprunté)
+        </button>
+    {% else %}
+        <form
+            method="post"
+            action="{{ path('app_book_delete', { id: book.id }) }}"
+            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer définitivement ce livre ?');"
+            style="display: inline-block;"
+        >
+            <input
+                type="hidden"
+                name="_token"
+                value="{{ csrf_token('delete' ~ book.id) }}"
+            />
+            <button class="btn btn-outline-danger">
+                <i class="bi bi-trash"></i> Supprimer
+            </button>
+        </form>
+    {% endif %}
 </div>

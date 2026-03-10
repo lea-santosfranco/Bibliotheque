@@ -55,7 +55,7 @@ class Emprunt
         return $this->dateRetour;
     }
 
-   public function setDateRetour(?\DateTimeImmutable $dateRetour): static
+    public function setDateRetour(?\DateTimeImmutable $dateRetour): static
     {
         $this->dateRetour = $dateRetour;
 

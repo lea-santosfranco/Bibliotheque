@@ -150,4 +150,13 @@ class Book
 
         return $this;
     }
+     public function isEmprunte(): bool
+    {
+        foreach ($this->emprunts as $emprunt) {
+            if ($emprunt->getDateRetour() === null) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

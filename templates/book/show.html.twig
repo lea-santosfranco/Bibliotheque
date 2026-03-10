@@ -1,46 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails du livre
-{% endblock %}
+{% block title %}Détails - {{ book.titre }}{% endblock %}
 
 {% block body %}
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="text-center">
+                        <img src="{{ asset('images/' ~ book.image) }}" 
+                             class="img-fluid rounded shadow" 
+                             alt="{{ book.titre }}"
+                             style="max-height: 500px; object-fit: cover;">
+                    </div>
+                </div>
 
-	<div class="containerShow" class="container">
-		<h1>Fiche détaillée du livre</h1>
+                <div class="col-md-8">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h1 class="display-5 fw-bold">{{ book.titre }}</h1>
+                        <div>
+                            {% if book.stock > 0 %}
+                                <span class="badge bg-success fs-6">Disponible ({{ book.stock }})</span>
+                            {% else %}
+                                <span class="badge bg-danger fs-6">Indisponible</span>
+                            {% endif %}
+                        </div>
+                    </div>
 
-		<hr>
+                    <p class="text-muted fs-4">par <strong>{{ book.auteur }}</strong></p>
+                    
+                    <hr>
 
-		<div class="row">
-			<img class="imgShow" src="{{ asset('images/'~book.image)}}" class="imgbook card-img-top" alt="image des livres">
-		</div>
+                    <h5 class="fw-bold">Résumé</h5>
+                    <p class="text-secondary" style="text-align: justify; line-height: 1.6;">
+                        {{ book.resume|default('Aucun résumé disponible pour ce livre.') }}
+                    </p>
 
-		<div class="col-md-8">
-			<h2>Titre :
-				{{ book.titre }}</h2>
-			<p>
-				Auteur :
-				{{ book.auteur }}</p>
-			<p>
-				Résumé :
-				{{ book.resume }}
-			</p>
-			<p>
-				Statut :
-				{% if book.stock > 0 %}
-					<span class="badge bg-success">Disponible</span>
-				{% else %}
-					<span class="badge bg-danger">Indisponible</span>
-				{% endif %}
-			</p>
+                    <div class="mt-5 d-flex gap-2">
+                        <a href="{{ path('app_home') }}" class="btn btn-outline-secondary px-4">
+                            <i class="bi bi-arrow-left"></i> Retour
+                        </a>
 
-			<a href="{{ path('app_home') }}" class="btn btn-secondary">Retour à la liste</a>
-			{% if book.stock > 0 %}
-				<a href="{{ path('app_emprunt_new', {'id': book.id}) }}" class="btn btn-primary">
-					Emprunter ce livre
-				</a>
-			{% else %}
-				<button class="btn btn-primary" disabled>Victime de son succès</button>
-			{% endif %}
-		</div>
-	</div>
+                        {% if book.stock > 0 %}
+                            <a href="{{ path('app_emprunt_new', {'id': book.id}) }}" class="btn btn-primary btn-lg px-5 shadow">
+                                Emprunter ce livre
+                            </a>
+                        {% else %}
+                            <button class="btn btn-secondary btn-lg px-5" disabled>
+                                Victime de son succès
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

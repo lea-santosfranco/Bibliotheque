@@ -10,14 +10,15 @@
     width: 250px;
 }
 .containerShow{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
+   padding: 2rem 0;
 }
 .titleBookLink{
     text-decoration: none;
     
+}
+.img-hover {
+    transition: transform 0.3s ease;
+}
+.img-hover:hover {
+    transform: scale(1.05);
 }

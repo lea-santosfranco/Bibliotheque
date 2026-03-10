@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	<div
-		class="container mt-4">
+	<div class="container mt-4">
 		{% for label, messages in app.flashes %}
 			{% for message in messages %}
 				<div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
@@ -16,7 +15,8 @@
 			{% endfor %}
 		{% endfor %}
 
-		<h1 class="text-uppercase"> EMPRUNT -
+		<h1 class="text-uppercase">
+			EMPRUNT -
 			{{ book.titre }}</h1>
 
 		<div class="alert alert-info">
@@ -24,39 +24,40 @@
 			exemplaires disponibles en rayon.
 		</div>
 
-	<div class="card-body">
-    {{ form_start(form) }}
+		<div class="card-body">
+			{{ form_start(form) }}
 
-    {% if app.user %}
-        <div class="alert alert-light border mb-4">
-            <p>Identité : {{ app.user.firstName }} {{ app.user.lastName }}</p>
-            <p>Email : {{ app.user.email }}</p>
-        
-        </div>
-        
-        {% if form.phone is defined %}
-            {{ form_row(form.phone) }}
-        {% endif %}
+			{% if app.user %}
+				<div class="alert alert-light border mb-4">
+					<p>Identité :
+						{{ app.user.firstName }}
+						{{ app.user.lastName }}</p>
+					<p>Email :
+						{{ app.user.email }}</p>
+					{% if form.phoneNumber is defined %}
+						{{ form_row(form.phoneNumber) }}
+					{% endif %}
+				</div>
 
-    {% else %}
-        {{ form_row(form.user) }}
-        <div class="row">
-            <div class="col-md-6">{{ form_row(form.lastName) }}</div>
-            <div class="col-md-6">{{ form_row(form.firstName) }}</div>
-        </div>
-        {{ form_row(form.email) }}
-        {{ form_row(form.phone) }}
-    {% endif %}
+			{% else %}
+				{{ form_row(form.user) }}
+				<div class="row">
+					<div class="col-md-6">{{ form_row(form.lastName) }}</div>
+					<div class="col-md-6">{{ form_row(form.firstName) }}</div>
+				</div>
+				{{ form_row(form.email) }}
+				{{ form_row(form.phoneNumber) }}
+			{% endif %}
 
-    <button type="submit" class="btn btn-success btn-lg w-100 mt-3">
-        CONFIRMER L'EMPRUNT
-    </button>
+			<button type="submit" class="btn btn-success btn-lg w-100 mt-3">
+				CONFIRMER L'EMPRUNT
+			</button>
 
-    {{ form_end(form) }}
-</div>
-</div>
-		<a href="{{ path('app_book_index') }}" class="btn btn-link mt-3 text-secondary text-decoration-none">
-			 Retour au catalogue
+			{{ form_end(form) }}
+		</div>
+		<a href="{{ path('app_book_index') }}" class="btn btn-outline-primary">
+			Retour au catalogue
 		</a>
 	</div>
+
 {% endblock %}

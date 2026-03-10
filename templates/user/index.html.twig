@@ -1,45 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index
-{% endblock %}
+{% block title %}Gestion des Utilisateurs{% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1>User index</h1>
-
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Email</th>
-					<th>Roles</th>
-					<th>Prénom</th>
-					<th>Nom</th>
-					<th>Numéro de téléphone</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for user in users %}
-					<tr>
-						<td>{{ user.id }}</td>
-						<td>{{ user.email }}</td>
-						<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-						<td>{{ user.firstName }}</td>
-						<td>{{ user.lastName }}</td>
-						<td>{{ user.phoneNumber }}</td>
-						<td>
-							<a class="btn btn-outline-success" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-							<a class="btn btn-outline-primary" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="8">no records found</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white p-3">
+            <h1 class="h4 mb-0"> Liste des Utilisateurs</h1>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4 py-3">Identité</th>
+                        <th>Email</th>
+                        <th>Rôles</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td class="ps-4">
+                                <span class="fw-bold">{{ user.firstName }} {{ user.lastName|upper }}</span>
+                                <div class="text-muted small">ID: {{ user.id }}</div>
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% for role in user.roles %}
+                                    {% if role == 'ROLE_ADMIN' %}
+                                        <span class="badge bg-danger">Admin</span>
+                                    {% elseif role == 'ROLE_EDITOR' %}
+                                        <span class="badge bg-warning text-dark">Éditeur</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Membre</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="btn-group btn-group-sm">
+                                    <a class="btn btn-outline-primary" href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
+                                    <a class="btn btn-primary" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center py-5 text-muted">Aucun utilisateur enregistré.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

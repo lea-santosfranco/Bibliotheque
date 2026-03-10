@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Création de compte{% endblock %}
 
 {% block body %}
    <div class="container" >
-        <h1 class="mb-4">Register</h1>
+        <h1 class="mb-4">Création de compte</h1>
         {{ form_errors(registrationForm) }}
 
         {{ form_start(registrationForm) }}
@@ -22,7 +22,7 @@
             }) }}
             {{ form_widget(registrationForm.agreeTerms, {'label': "Veuillez accepter les conditons d'utilisation"}) }}
 
-            <button type="submit" class="btn btn-success mt-4">Register</button>
+            <button type="submit" class="btn btn-success mt-4">S'inscrire</button>
         {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

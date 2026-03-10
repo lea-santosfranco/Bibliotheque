@@ -1,55 +1,91 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book index
-{% endblock %}
+{% block title %}Catalogue des Livres{% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1>📚 Catalogue des Livres</h1>
-		<table class="table">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Titre</th>
-					<th>Auteur</th>
-					<th>Résumé</th>
-					<th>Isbn</th>
-					<th>Stock</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for book in books %}
-					<tr>
-						<td><img class="imgBookIndex" src="{{ asset('images/'~book.image)}}" class="imgbook card-img-top" alt="image des livres"></td>
-						<td>{{ book.titre }}</td>
-						<td>{{ book.auteur }}</td>
-						<td>{{ book.resume |slice(0,60)}}...</td>
-						<td>{{ book.isbn }}</td>
-						<td>{{ book.stock }}</td>
-						<td>
-							{% if book.stock > 0 %}
-								<a class="btn btn-outline-primary" href="{{ path('app_emprunt_new', {'id': book.id}) }}">Emprunter</a>
-							{% else %}
-								<button class="btn btn-secondary" disabled>Victime de son succès</button>
-							{% endif %}
-							<a class="btn btn-outline-primary" href="{{ path('app_book_show', {'id': book.id})}}">Voir</a>
-							{% if is_granted('ROLE_EDITOR') %}
-								<a class="btn btn-outline-success" href="{{path('app_book_edit', {'id': book.id})}}">Modifier</a>
-								<a class="btn btn-danger" href="{{path('app_book_delete', {'id': book.id})}}">Supprimer</a>
-							{% endif %}
-						</td>
+<div class="container-fluid mt-5 px-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h1 class="h3 mb-0 text-dark fw-bold">📚 Catalogue des Livres</h1>
+            {% if is_granted('ROLE_EDITOR') %}
+                <a class="btn btn-success px-4" href="{{ path('app_book_new') }}">
+                    + Ajouter un nouveau livre
+                </a>
+            {% endif %}
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-uppercase small fw-bold">
+                    <tr>
+                        <th class="ps-4" style="width: 150px;">Livre</th>
+                        <th>Informations</th>
+                        <th style="width: 150px;">ISBN</th>
+                        <th class="text-center" style="width: 150px;">Disponibilité</th>
+                        <th class="text-end pe-4" style="width: 350px;">Actions de gestion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td class="ps-4">
+                                <a href="{{ path('app_book_show', {'id': book.id}) }}">
+                                    <img src="{{ asset('images/' ~ book.image) }}" 
+                                         alt="{{ book.titre }}" 
+                                         class="rounded shadow-sm border" 
+                                         style="width: 120px; height: 160px; object-fit: cover; display: block;">
+                                </a>
+                            </td>
+                            <td>
+                                <h5 class="mb-1 fw-bold">{{ book.titre }}</h5>
+                                <p class="text-muted mb-2">Auteur : <strong>{{ book.auteur }}</strong></p>
+                                <div class="small text-secondary d-none d-lg-block" style="max-width: 400px;">
+                                    {{ book.resume|slice(0, 100) }}...
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border font-monospace">{{ book.isbn }}</span>
+                            </td>
+                            <td class="text-center">
+                                {% if book.stock > 0 %}
+                                    <div class="text-success fw-bold">{{ book.stock }} en stock</div>
+                                    <span class="badge bg-success-subtle text-success">Disponible</span>
+                                {% else %}
+                                    <span class="badge bg-danger-subtle text-danger">Rupture</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="d-flex flex-wrap justify-content-end gap-2">
+                                    <a class="btn btn-sm btn-outline-dark" href="{{ path('app_book_show', {'id': book.id}) }}">
+                                        Détails
+                                    </a>
+                                    
+                                    {% if book.stock > 0 %}
+                                        <a class="btn btn-sm btn-info" href="{{ path('app_emprunt_new', {'id': book.id}) }}">
+                                            Emprunter
+                                        </a>
+                                    {% endif %}
 
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="6">Pas de livre trouvé</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		{% if is_granted('ROLE_EDITOR') %}
-			<a class="btn btn-outline-primary" href="{{ path('app_book_new') }}">Ajouter un nouveau livre</a>
-		{% endif %}
-	</div>
+                                    {% if is_granted('ROLE_EDITOR') %}
+                                        <a class="btn btn-sm btn-warning text-white" href="{{ path('app_book_edit', {'id': book.id}) }}">
+                                            Modifier
+                                        </a>
+                                        <form method="post" action="{{ path('app_book_delete', {'id': book.id}) }}" style="display:inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
+                                            <button class="btn btn-sm btn-danger">Supprimer</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5">Aucun livre trouvé dans la base de données.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

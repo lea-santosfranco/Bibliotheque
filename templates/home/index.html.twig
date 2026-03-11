@@ -3,15 +3,28 @@
 {% block title %}Bienvenue à la bibliothèque{% endblock %}
 
 {% block body %}
-<div class="container py-5">
-    <h1 class="mb-5 text-center fw-bold">Nos Livres</h1>
-
+<div class="position-relative vh-60 d-flex align-items-center justify-content-center text-white mb-5" 
+     style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ asset('images/mediatheque-merignac-001.jpg') }}') no-repeat center center; background-size: cover; min-height: 500px;">
+    
+    <div class="container text-center py-5">
+        <h1 class="display-3 fw-bold mb-3 mt-4"> Bibliothèque</h1>
+        <p class="lead fs-4 mb-4">Découvrez notre collection et réservez vos ouvrages en ligne.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="{{ path('app_home') }}" method="get" class="bg-white p-2 rounded-pill shadow-lg d-flex">
+                    <input class="form-control border-0 rounded-pill ps-4" type="search" name="recherche" placeholder="Rechercher un titre ou un auteur..." value="{{ app.request.query.get('recherche') }}">
+                    <button class="btn btn-outline-info rounded-pill px-4 ms-2" type="submit">Rechercher</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container py-2">
     <div class="row g-4">
         {% for book in books %}
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0">
-                    
-                    <a href="{{ path('app_book_show', {'id': book.id}) }}" class="overflow-hidden">
+                <div class="card h-100 shadow-sm border-0 card-hover">
+                    <a href="{{ path('app_book_show', {'id': book.id}) }}" class="overflow-hidden rounded-top">
                         <img src="{{ asset('images/' ~ book.image) }}" 
                              class="card-img-top img-hover" 
                              alt="{{ book.titre }}"
@@ -22,20 +35,18 @@
                         <a href="{{ path('app_book_show', {'id': book.id}) }}" class="text-decoration-none text-dark">
                             <h5 class="card-title fw-bold mb-1">{{ book.titre }}</h5>
                         </a>
-                        
                         <p class="text-muted small mb-3">par {{ book.auteur }}</p>
 
                         <div class="mt-auto">
                             {% if book.stock > 0 %}
+                                <p class="text-success small fw-bold mb-2">● En stock</p>
                                 <div class="d-grid gap-2">
-                                    <a class="btn btn-info" href="{{ path('app_emprunt_new', {'id': book.id}) }}">
+                                    <a class="btn btn-info text-white fw-bold" href="{{ path('app_emprunt_new', {'id': book.id}) }}">
                                         Emprunter
-                                    </a>
-                                    <a class="btn btn-outline-secondary btn-sm" href="{{ path('app_book_show', {'id': book.id}) }}">
-                                        Détails
                                     </a>
                                 </div>
                             {% else %}
+                                <p class="text-danger small fw-bold mb-2">● Épuisé</p>
                                 <button class="btn btn-light w-100 text-muted" disabled>
                                     Victime de son succès
                                 </button>

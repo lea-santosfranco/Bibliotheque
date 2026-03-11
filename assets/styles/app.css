@@ -96,9 +96,7 @@
 .bg-green-200  { background-color: var(--bs-green-200) !important; }
 .bg-teal-200   { background-color: var(--bs-teal-200) !important; }
 .bg-cyan-200   { background-color: var(--bs-cyan-200) !important; }
-body {
-    background-color: rgb(236, 250, 253);
-}
+
 .loginForm {
     width: 500px;
     text-align: center;
@@ -118,3 +116,46 @@ body {
     width: 100%;
     height: 100vh;
 }
+.background-lightpink {
+    background-color: var(--bs-pink-200) !important;
+  }
+
+/* custom pink button palette */
+:root {
+  /* extra intermediate shade */
+  --bs-pink-300: #e8849a;
+
+  /* button color overrides - 4 shades from dark to light */
+  /* Supprimer: darkest pink */
+  --bs-danger: var(--bs-pink-900);
+  --bs-btn-danger-color: #fff;
+  
+  /* Modifier: 3rd lightest (pink-300) */
+  --bs-primary: var(--bs-pink-300);
+  --bs-btn-primary-color: #000;
+  
+  /* Emprunter: 2nd lightest (pink-200) */
+  --bs-info: var(--bs-pink-200);
+  --bs-btn-info-color: #000;
+  
+  /* Détail: lightest pink (pink-100) - using secondary/light for outline style */
+  --bs-secondary: var(--bs-pink-100);
+  --bs-btn-secondary-color: #000;
+  --bs-light: var(--bs-pink-100);
+  --bs-btn-light-color: #000;
+
+  /* text colours to ensure contrast */
+  --bs-btn-success-color: #000;
+  --bs-btn-warning-color: #000;
+}
+
+/* make any existing outline-dark buttons use rose shade */
+.btn-outline-dark {
+  color: var(--bs-pink-300) !important;
+  border-color: var(--bs-pink-300) !important;
+}
+.btn-outline-dark:hover, .btn-outline-dark:focus {
+  background-color: var(--bs-pink-300) !important;
+  color: #fff !important;
+}
+

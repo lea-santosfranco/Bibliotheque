@@ -56,7 +56,7 @@
                             </td>
                             <td class="text-end pe-4">
                                 <div class="d-flex flex-wrap justify-content-end gap-2">
-                                    <a class="btn btn-sm btn-outline-dark" href="{{ path('app_book_show', {'id': book.id}) }}">
+<a class="btn btn-sm btn-outline-secondary" href="{{ path('app_book_show', {'id': book.id}) }}">
                                         Détails
                                     </a>
                                     
@@ -67,7 +67,7 @@
                                     {% endif %}
 
                                     {% if is_granted('ROLE_EDITOR') %}
-                                        <a class="btn btn-sm btn-warning text-white" href="{{ path('app_book_edit', {'id': book.id}) }}">
+                                        <a class="btn btn-sm btn-primary text-dark" href="{{ path('app_book_edit', {'id': book.id}) }}">
                                             Modifier
                                         </a>
                                         <form method="post" action="{{ path('app_book_delete', {'id': book.id}) }}" style="display:inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">

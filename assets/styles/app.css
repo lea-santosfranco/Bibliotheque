@@ -139,15 +139,6 @@
   --bs-btn-info-color: #000;
   
   /* Détail: lightest pink (pink-100) - using secondary/light for outline style */
-  --bs-secondary: var(--bs-pink-100);
-  --bs-btn-secondary-color: #000;
-  --bs-light: var(--bs-pink-100);
-  --bs-btn-light-color: #000;
-
-  /* text colours to ensure contrast */
-  --bs-btn-success-color: #000;
-  --bs-btn-warning-color: #000;
-}
 
 /* make any existing outline-dark buttons use rose shade */
 .btn-outline-dark {
@@ -159,3 +150,4 @@
   color: #fff !important;
 }
 
+}

@@ -22,3 +22,19 @@
 .img-hover:hover {
     transform: scale(1.05);
 }
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.1) !important;
+}
+
+.img-hover {
+    transition: transform 0.5s ease;
+}
+
+.card-hover:hover .img-hover {
+    transform: scale(1.05);
+}

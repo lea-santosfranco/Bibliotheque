@@ -62,6 +62,8 @@ final class BookController extends AbstractController
             $entityManager->persist($book);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Le livre "' . $book->getTitre() . '" a été ajouté avec succès !');
+
             return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -105,6 +107,8 @@ final class BookController extends AbstractController
                 $book->setImage($newFileImageName);
             }
             $entityManager->flush();
+            
+            $this->addFlash('success', 'Les modifications pour "' . $book->getTitre() . '" ont été enregistrées.');
 
             return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -120,8 +124,12 @@ final class BookController extends AbstractController
     public function delete(Request $request, Book $book, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $book->getId(), $request->getPayload()->getString('_token'))) {
+            $titre = $book->getTitre();
             $entityManager->remove($book);
             $entityManager->flush();
+            
+            $this->addFlash('danger', 'Le livre "' . $titre . '" a été supprimé du catalogue.');
+            
         }
 
         return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
